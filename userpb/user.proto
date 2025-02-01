@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package user;
 
-import "google/api/annotations.proto";
+option go_package = "/userpb";
+import "third_party/google/api/annotations.proto";
 
 service UserService {
     rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse){
