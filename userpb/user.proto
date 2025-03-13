@@ -4,38 +4,46 @@ package user;
 
 option go_package = "/userpb";
 
-import "third_party/google/api/annotations.proto";
-
 service UserService {
-    rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse){
-        option (google.api.http) = {
-            post: "/v1/user/register",
-            body: "*"
-        };
-    };
-    rpc LoginUser (LoginUserRequest) returns (LoginUserResponse){
-        option (google.api.http) = {
-            post: "/v1/user/login",
-            body: "*"
-        };
-    };
-};
-
-message RegisterUserRequest{
-    string name = 1;
-    string email = 2;
-    string password = 3;
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+  rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (DeleteUserResponse);
 }
 
-message RegisterUserResponse{
-    string userId = 1;
+message GetUserRequest {
+  string userid = 1;
 }
 
-message LoginUserRequest{
-    string email = 1;
-    string password = 2;
+message GetUserResponse {
+  string userid = 1;
+  string name = 2;
+  string email = 3;
 }
 
-message LoginUserResponse{
-    string token = 1;
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message CreateUserResponse {
+  string userid = 1;
+}
+
+message UpdateUserRequest {
+  string userid = 1;
+  string name = 2;
+}
+
+message UpdateUserResponse {
+  bool success = 1;
+}
+
+message DeleteUserRequest {
+  string userid = 1;
+}
+
+message DeleteUserResponse {
+  bool success = 1;
 }
